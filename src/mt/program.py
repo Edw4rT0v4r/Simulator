@@ -14,14 +14,13 @@ def escape_ansi(line):
     return ansi_escape.sub('', line)
 
 
-def print_result(data):
+def print_result(data, more_comment=''):
     for x, z in data.items():
         data[x] = z if escape_ansi(z) != '_' else ' '
-    print('\n')
-    print(' '.join(map(str, data.values())))
+    print(' '.join(map(str, data.values())) + more_comment)
 
 
-def mt(q='0', v='_', n_v='_', position=0, n_q='0', a=None):
+def mt(q='0', v='_', position=0, a=None):
     aux_p = position
     aux_v = v
 
@@ -46,11 +45,9 @@ def mt(q='0', v='_', n_v='_', position=0, n_q='0', a=None):
         else:
             position -= 1
     elif q in F:
-        print_result(a)
         print('\nHalted in state ' + q)
         return
     else:
-        print_result(a)
         print('No rule for state ' + q + ' and symbol ' + v)
         return
 
@@ -75,8 +72,7 @@ def mt(q='0', v='_', n_v='_', position=0, n_q='0', a=None):
 
     a = {k: a[k] for k in sorted(a)}
 
-    print(' '.join(map(str, a.values())))
-
+    print_result(a)
     time.sleep(0.1)
 
-    mt(n_q, v, n_v, position, n_q, a)
+    mt(n_q, v, position, a)

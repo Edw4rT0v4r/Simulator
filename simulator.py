@@ -37,8 +37,7 @@ def readText(data, c_p):
                     data_line[ind] = i
 
                 position = 0
-                print(' '.join(map(str, data_line.values())))
-                print('\n')
+                print_result(data_line, ' Linea original')
                 for ind, val in data_line.items():
                     if val == '*':
                         position = ind
@@ -47,7 +46,8 @@ def readText(data, c_p):
                         data_line[ind] = '_'
                     v = data_line[position]
 
-                mt('0', v, v, position, '0', data_line)
+                print_result(data_line, ' Inicio')
+                mt('0', v, position, data_line)
                 break
             else:
                 print("No se identifica el texto")
